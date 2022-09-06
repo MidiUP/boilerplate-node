@@ -1,0 +1,11 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Boilerplate API Express",
+    "description": "Boilerplate em NodeJS Clean Architeture.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    
+  }
+}

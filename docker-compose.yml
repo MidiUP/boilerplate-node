@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+  api:
+    container_name: api-container
+    build:
+      context: .
+    depends_on:
+      - redis
+    links:
+      - redis
+    command: npm run start:dev
+    volumes:
+      - '.:/app'
+      - 'api:/app/node_modules'
+    ports:
+      - '$PORT:$PORT'
+    environment:
+      - PORT=$PORT
+      - DATABASE_URL=$DATABASE_URL
+  redis:
+    image: bitnami/redis:latest
+    expose:
+      - 6379
+    environment:
+      - REDIS_PASSWORD=$REDIS_PASSWORD
+volumes: 
+  db:
+  api:
