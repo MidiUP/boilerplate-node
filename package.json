@@ -10,7 +10,7 @@
     "test:integration": "npm test -- --watch -c jest-config-integration.js",
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
-    "test:precommit": "jest --passWithNoTests --silent",
+    "test:precommit": "jest --passWithNoTests --silent --watchAll=false",
     "husky:init": "npx husky install"
   },
   "dependencies": {
