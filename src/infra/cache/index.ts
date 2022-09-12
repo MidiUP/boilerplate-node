@@ -1,11 +1,11 @@
 import { IDbCache } from '../interfaces/db-cache.interface';
 import Ioredis from 'ioredis';
 
-export class Redis implements IDbCache {
+export class Cache implements IDbCache {
   private readonly connection = {
     host: process.env.REDIS_HOST,
     port: Number(process.env.REDIS_PORT),
-    password: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD,
   };
   private readonly client = new Ioredis(this.connection);
 
@@ -18,10 +18,14 @@ export class Redis implements IDbCache {
     }
   }
 
-  async setData(key: string, data: any): Promise<void> {
+  async setData(
+    key: string,
+    data: any,
+    expirationSeconds: number,
+  ): Promise<void> {
     try {
-      const dataString = JSON.stringify(data);
-      await this.client.set(key, dataString);
+      const dataString = typeof data === 'object' ? JSON.stringify(data) : data;
+      await this.client.set(key, dataString, 'EX', expirationSeconds);
       return;
     } catch (err) {
       throw err;
