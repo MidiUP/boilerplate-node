@@ -1,5 +1,5 @@
 import winston from 'winston';
-import { AbstractLogger } from '../interfaces/logger.interface';
+import { AbstractLogger } from '../abstract-class/logger.abstract';
 
 export class Logger extends AbstractLogger {
   private readonly logger: winston.Logger;
@@ -52,7 +52,7 @@ export class Logger extends AbstractLogger {
   private readonly level = () => {
     const env = process.env.NODE_ENV || 'development';
     const isDevelopment = env === 'development';
-    return isDevelopment ? 'debug' : 'warn';
+    return isDevelopment ? 'debug' : 'info';
   };
 
   info(message: string): void {

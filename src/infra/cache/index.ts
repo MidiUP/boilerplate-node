@@ -1,6 +1,5 @@
-import { IDbCache } from '../interfaces/dbCache.interface';
+import { IDbCache } from '../interfaces/db-cache.interface';
 import Ioredis from 'ioredis';
-import 'dotenv/config';
 
 export class Redis implements IDbCache {
   private readonly connection = {
