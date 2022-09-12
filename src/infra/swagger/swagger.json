@@ -5,7 +5,141 @@
     "description": "Boilerplate em NodeJS Clean Architeture.",
     "version": "1.0.0"
   },
+  "tags": [
+    {
+      "name": "Operation",
+      "description": "Operações"
+    }
+  ],
   "paths": {
-    
+    "/api/v2/operation": {
+      "get": {
+        "tags": ["Operation"],
+        "summary": "buscar todas operações",
+        "description": "buscar todas operações disponíveis",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/operation"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server-error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Operation"],
+        "summary": "Cadastrar operações",
+        "description": "Cadastrar uma nova operação",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/create-operation"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Operação criada com sucesso"
+          },
+          "400": {
+            "description": "Dados inválidos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server-error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno do servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/server-error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "operation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "description": "número de identificação das operações",
+            "example": 0
+          },
+          "name": {
+            "type": "string",
+            "description": "nome da operação",
+            "example": "Desenvolvimento"
+          }
+        }
+      },
+      "create-operation": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "nome da operação",
+            "example": "Desenvolvimento",
+            "required": true
+          }
+        }
+      },
+      "server-error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "mensagem de erro",
+            "example": "erro interno do servidor"
+          },
+          "data": {
+            "type": "object",
+            "description": "detalhes disponíveis do erro"
+          }
+        }
+      },
+      "bad-request": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "mensagem de erro",
+            "example": "[property] is required"
+          },
+          "data": {
+            "type": "object",
+            "description": "detalhes disponíveis do erro"
+          }
+        }
+      }
+    }
   }
 }
