@@ -19,6 +19,6 @@ const db = new DataSource({
 
 db.initialize()
   .then((db) => logger.info('database successfully connected'))
-  .catch((err) => logger.error('database unavailable')); //TODO: implementar tratativa caso DB indisponível
+  .catch((err) => logger.error('database unavailable'));
 
 export default db;

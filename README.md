@@ -5,9 +5,9 @@
 ## Description
 
 Squad Operações
-  - ORM: Prisma
+  - ORM: TypeORM
   - Tests: Jest
-  - Git Hooks: commitlint, lint-staged
+  - Git Hooks: commitzen, lint-staged
 
 
 ## Installation
@@ -19,14 +19,12 @@ $ npm install
 ## Running the app
 
 ```bash
-# development
-$ npm run start
 
 # watch mode
 $ npm run start:dev
 
 # production mode
-$ npm run start:prod
+$ npm start
 
 # docker
 $ docker-compose up
