@@ -9,7 +9,6 @@ export class BadRequestError extends Error {
     return {
       message: this.message,
       data: this.data,
-      status: 400,
     };
   }
 }

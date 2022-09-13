@@ -1,4 +1,9 @@
-import { created, success, error } from '../../common/helpers/http.helper';
+import {
+  created,
+  success,
+  serverError,
+  badRequest,
+} from '../../common/helpers/http.helper';
 import { Request, Response } from 'express';
 import { Logger } from '../../infra/logger';
 import { IValidator } from 'common/interfaces/validator.interface';
@@ -19,8 +24,7 @@ export class OperationController {
       return success(res, operations);
     } catch (err) {
       this.logger.error(JSON.stringify(err));
-      const serverError = new ServerError(err);
-      return error(res, serverError.toJSON());
+      return serverError(res, new ServerError(err));
     }
   }
 
@@ -30,7 +34,7 @@ export class OperationController {
 
       const errorValidation = await this.validator.validate(body);
       if (errorValidation) {
-        return error(res, errorValidation.toJSON());
+        return badRequest(res, errorValidation);
       }
 
       await this.service.createOperation(body);
@@ -38,8 +42,7 @@ export class OperationController {
       return created(res);
     } catch (err) {
       this.logger.error(JSON.stringify(err));
-      const serverError = new ServerError(err);
-      return error(res, serverError.toJSON());
+      return serverError(res, new ServerError(err));
     }
   }
 }

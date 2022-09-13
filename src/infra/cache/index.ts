@@ -31,7 +31,7 @@ export class Cache implements IDbCache {
       });
       return JSON.parse(data);
     } catch (err) {
-      this.logger.error(JSON.stringify(err));
+      this.logger.error(err);
       return null;
     }
   }
@@ -67,7 +67,7 @@ export class Cache implements IDbCache {
       await this.client.del(key);
       return;
     } catch (err) {
-      this.logger.error(JSON.stringify(err));
+      this.logger.error(err);
       return new CacheUnavailableError(this.MESSAGE_ERROR_UNAVAILABILITY);
     }
   }

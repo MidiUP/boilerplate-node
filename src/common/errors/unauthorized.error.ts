@@ -1,9 +1,9 @@
 import { IClientErrorJson } from '../interfaces/client-error-json.interface';
 
-export class CacheUnavailableError extends Error {
+export class UnauthorizedError extends Error {
   constructor(readonly message: string, readonly data: object = {}) {
-    super(`Cache Unavailable Error: ${message}`);
-    this.name = 'Cache Unavailable';
+    super(`Unauthorized: ${message}`);
+    this.name = 'Unauthorized';
   }
   public toJSON(): IClientErrorJson {
     return {

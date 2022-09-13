@@ -9,7 +9,6 @@ export class ServerError extends Error {
     return {
       message: 'Internal server error',
       data: this.data,
-      status: 500,
     };
   }
 }
